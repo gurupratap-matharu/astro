@@ -11,7 +11,9 @@ help:
 	@echo " - isort 	: sorts all imports of the project"
 
 clean:
-	rm -rf __pycache__ .pytest_cache
+	@echo "Removing cache recursively..."
+	find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
+	@echo "Done!"
 
 test:
 	python -m unittest
