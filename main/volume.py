@@ -15,7 +15,8 @@ def calculate_volume_of_sphere(radius=0):
         raise ValueError("radius must a positive real number")
     return (4 * math.pi * (radius ** 3)) / 3
 
-if __name__=='__main__':
-    radius = float(input('Please enter the radius of the sphere: '))
+
+if __name__ == "__main__":
+    radius = float(input("Please enter the radius of the sphere: "))
     volume = calculate_volume_of_sphere(radius)
     print(volume)

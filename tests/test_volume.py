@@ -41,4 +41,4 @@ class SphereVolumeTests(unittest.TestCase):
 
     def test_volume_for_string_input_raises_exception(self):
         with self.assertRaises(TypeError):
-            calculate_volume_of_sphere(radius='1')
+            calculate_volume_of_sphere(radius="1")
