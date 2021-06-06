@@ -4,7 +4,7 @@
 import math
 
 
-def calculate_area_of_a_triangle(a, b, c):
+def calculate_area_of_a_triangle(a=None, b=None, c=None):
     """
     Calculates the area of a triangle using Heron's formula.
 
@@ -20,10 +20,17 @@ def calculate_area_of_a_triangle(a, b, c):
         2. sum of any two sides should be greater than the third one.
 
     """
-    c1 = (a > 0) and (b > 0) and (c > 0)
-    c2 = (a + b) > c and (b + c) > a and (c + a) > b
+    a_ok = isinstance(a, (int, float))
+    b_ok = isinstance(b, (int, float))
+    c_ok = isinstance(c, (int, float))
 
-    if not (c1 and c2):
+    if not (a_ok and b_ok and c_ok):
+        raise TypeError("Triangle sides must be either integer or floats")
+
+    c_1 = (a > 0) and (b > 0) and (c > 0)
+    c_2 = (a + b) > c and (b + c) > a and (c + a) > b
+
+    if not (c_1 and c_2):
         raise ValueError("This is not a valid triangle!")
 
     s = (a + b + c) / 2
@@ -31,19 +38,29 @@ def calculate_area_of_a_triangle(a, b, c):
 
     return area
 
-if __name__=='__main__':
+
+if __name__ == "__main__":
     print("Calculates the area of a triangle")
 
     a = float(input("Enter length of first side: "))
     b = float(input("Enter length of second side: "))
     c = float(input("Enter length of third side: "))
 
-    print("""The three sides of the triangle are
+    print(
+        """The three sides of the triangle are
           a: {a}
           b: {b}
-          c: {c}""".format(a=a, b=b, c=c))
+          c: {c}""".format(
+            a=a, b=b, c=c
+        )
+    )
     try:
         area = calculate_area_of_a_triangle(a=a, b=b, c=c)
         print("Area of triangle: {}".format(area))
-    except ValueError as e:
-        print("The sides {a}, {b}, {c} do not form a valid triangle!".format(a=a, b=b, c=c))
+    except ValueError as err:
+        print(
+            "The sides {a}, {b}, {c} do not form a valid triangle!".format(
+                a=a, b=b, c=c
+            )
+        )
+        print(err)
