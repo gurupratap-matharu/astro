@@ -6,12 +6,14 @@ C     -------------------------------------------------------------------
 C     -------------------------------------------------------------------
 C     Declare variables for the program
 C     -------------------------------------------------------------------
-      REAL T, N
+      REAL THETA 
 C     -------------------------------------------------------------------
 C     Take input from user
 C     -------------------------------------------------------------------
       
-      WRITE(*,*) "Veer enter T AND N: "
-      READ(*,*) T, N
-      WRITE(*,*) "Veer you entered T and N as: ", T, N
+      WRITE(*,*) "Veer enter THETA: "
+      READ(*,*) THETA
+      WRITE(*,*) "Veer you entered THETA: ", THETA
+
+      WRITE(*,*) "COS(THETA)=", COS(THETA)
       END PROGRAM EXPONENTIAL
