@@ -18,19 +18,22 @@ C     ------------------------------------------------------------------
       write(*,*) 'Enter the # of iterations (M):'
       read(*,*) m
       write(*,*) 'You entered # of iterations (M):', m
-      write(*,*) 'Enter name of output file:'
       
 C     Ask user the name of the output file 
 C     ------------------------------------------------------------------
+      write(*,*) 'Enter name of output file:'
       read(*,*) output_file
       write(*,*) 'Results will be written to file: ', output_file
-      open(unit=23, file=output_file)
+      open(unit=23, file=output_file) ! open file to write
+
+C     Write header row in a nice format on screen and to file
+C     ------------------------------------------------------------------
+      write(*,'(A5, 2A25)') 'x', 'cos(x)[calculated]', 'cos(x)[actual]'
+      write(23,'(A5, 2A25)') 'x', 'cos(x)[calculated]', 'cos(x)[actual]'
 
 
 C     Calculate the cos(x) for x = 0.0 to 1.5 with step of 0.05
 C     ------------------------------------------------------------------
-      write(*,'(A5, 2A25)') 'x', 'cos(x)[calculated]', 'cos(x)[actual]'
-      write(23,'(A5, 2A25)') 'x', 'cos(x)[calculated]', 'cos(x)[actual]'
 
       do x = 0.0, 1.5, 0.05
       
@@ -46,12 +49,11 @@ C     ------------------------------------------------------------------
             result = result + temp
         enddo
 
-C     Print the value of x, cos(x) calculated and cos(x) actual
+C     Write the value of x, cos(x)[calculated] & cos(x)[actual]
 C     ------------------------------------------------------------------
         write(*,'(F7.2,2F20.7)') x, result, cos(x)
         write(23,'(F7.2,2F20.7)') x, result, cos(x)
       enddo
-
 
 C     Close the file
 C     ------------------------------------------------------------------
