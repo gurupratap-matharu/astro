@@ -2,11 +2,12 @@ C     ------------------------------------------------------------------
 C     PROGRAM TO CALCULATE THE ROOTS OF A QUADRATIC EQUATION
 C     ------------------------------------------------------------------
       PROGRAM ROOTS
+        implicit none
 
 C     ------------------------------------------------------------------
 C     DECLARE PARAMETERS, VARIABLES 
 C     ------------------------------------------------------------------
-      REAL A, B, C, X1, X2, DISCRIMINANT
+      REAL  ::  A, B, C, X1, X2, DISCRIMINANT
 
 C     ------------------------------------------------------------------ 
 C     READ INPUTS FROM USER

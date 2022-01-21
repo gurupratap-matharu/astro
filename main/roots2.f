@@ -2,6 +2,7 @@ C     ------------------------------------------------------------------
 C     PROGRAM TO CALCULATE THE ROOTS OF A QUADRATIC EQUATION
 C     ------------------------------------------------------------------
       PROGRAM ROOTS
+        implicit none
 
 C     ------------------------------------------------------------------
 C     DECLARE PARAMETERS, VARIABLES 
@@ -35,13 +36,14 @@ C     CALCULATE THE ROOTS OF THE QUADRATIC EQUATION
 C     WE USE THE BHASKARA FORMULA
 C     ------------------------------------------------------------------
       DISCRIMINANT = SQRT(B**2 - 4*A*C)
-      Q = -1 * (B + SIGN(B, B) * DISCRIMINANT)) / 2
       
       IF (DISCRIMINANT >= 0) THEN
-        WRITE(*,*) "-------------------------------"
-        WRITE(*,*) "DISCRIMINANT = ", DISCRIMINANT
-        WRITE(*,*) "-------------------------------"
-
+        Q = -0.5 * (B + SIGN(DISCRIMINANT, B))
+            WRITE(*,*) "-------------------------------"
+            WRITE(*,*) "DISCRIMINANT = ", DISCRIMINANT
+            WRITE(*,*) "Q = ", Q
+            WRITE(*,*) "-------------------------------"
+            
         X1 = Q / A
         X2 = C / Q
 
