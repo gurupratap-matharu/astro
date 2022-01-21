@@ -3,12 +3,13 @@ C     PROGRAM TO CALCULATE RELATIVITY FACTORS - VELOCITY, LORENTZ
 C     AND DOPPLER
 C     ------------------------------------------------------------------
       PROGRAM RELATIVITY
+        IMPLICIT NONE
 
 C     ------------------------------------------------------------------
 C     DECLARE PARAMETERS, VARIABLES 
 C     ------------------------------------------------------------------
       REAL BETA, GAMMA, DELTA
-      PARAMETER (C = 3.E5, V = 2.91E5, THETA = 0.02129)
+      REAL, PARAMETER   :: C = 3.E5, V = 2.91E5, THETA = 0.02129
       WRITE(*,*) "VEER C, V, THETA = ", C, V, THETA
 
 C     ------------------------------------------------------------------ 
@@ -22,8 +23,5 @@ C     ------------------------------------------------------------------
       WRITE(*,*) "VEER BETA = ", BETA
       WRITE(*,*) "VEER GAMMA = ", GAMMA 
       WRITE(*,*) "VEER DELTA = ", DELTA
-
-
-      
 
       END PROGRAM RELATIVITY
