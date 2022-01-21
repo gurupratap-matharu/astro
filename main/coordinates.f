@@ -1,36 +1,38 @@
-C     -----------------------------------------------------------------
 C     PROGRAM TO CALCULATE THE COORDINATES X, Y, Z OF A PARTICLE
 C     FROM THE FOLLOWING EQUATIONS
 C     -----------------------------------------------------------------
-      PROGRAM COORDINATES
+      program coordinates
+        implicit none
 
-C     -----------------------------------------------------------------
+
 C     DECLARE VARIABLES
 C     -----------------------------------------------------------------
-      REAL X, Y, Z
+      real  ::  x, y, z
+      real  :: alpha, theta
+
 
 C     ----------------------------------------------------------------- 
 C     TAKE INPUT OF ALPHA AND THETA FROM USER
 C     -----------------------------------------------------------------
-      WRITE(*,*) "ENTER ALPHA: "
-      READ(*,*) ALPHA
+      write(*,*) "Enter alpha (⍺): "
+      read(*,*) alpha
 
-      WRITE(*,*) "ENTER THETA (IN RADIANS): "
-      READ(*,*) THETA
+      write(*,*) "Enter theta (ϴ) (radians): "
+      read(*,*) theta
 
-      WRITE(*,*) "ALPHA = ", ALPHA
-      WRITE(*,*) "THETA = ", THETA
+      write(*,*) "alpha(⍺) = ", alpha
+      write(*,*) "theta(ϴ) = ", theta
 
 C     -----------------------------------------------------------------
 C     CALCULATE X, Y, Z
 C     -----------------------------------------------------------------
-      X = ALPHA * COS(THETA) ** 3
-      Y = ALPHA * SIN(THETA) ** 3
-      Z = EXP(ABS(X + Y) ** 0.25) * LOG(1 + TAN(THETA) ** 2)
+      x = alpha * cos(theta) ** 3
+      y = alpha * sin(theta) ** 3
+      z = exp(abs(X + Y) ** 0.25) * log(1 + tan(theta) ** 2)
 
 C     -----------------------------------------------------------------
 C     PRINT RESULTS TO THE SCREEN
 C     -----------------------------------------------------------------
-      WRITE(*,*) "(X, Y, Z) = ", X, Y, Z
+      write(*,'(A, 3F7.3)') "(x, y, z) = ", x, y, z
 
-      END PROGRAM COORDINATES
+      end program coordinates
