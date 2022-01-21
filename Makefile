@@ -1,3 +1,6 @@
+# variables
+FC=gfortran
+CFLAGS=-c -g -Og -Wall
 APP_LIST ?= main tests
 
 .PHONY: ci test lint
@@ -10,9 +13,24 @@ help:
 	@echo " - clean		: removes __pycache__ and .pytest_cache"
 	@echo " - isort 	: sorts all imports of the project"
 
+# linking
+a.out: main.o
+	$(FC) main.o
+
+# compiling
+main.o: main.f90
+	$(FC) $(CFLAGS) main.f90
+
+# cleanup
+# run 
+run:
+	make
+	./a.out
+
 clean:
 	@echo "Removing cache recursively..."
 	find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
+	rm *.o a.out
 	@echo "Done!"
 
 test:
