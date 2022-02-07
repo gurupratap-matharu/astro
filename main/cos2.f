@@ -1,19 +1,22 @@
+C     ------------------------------------------------------------------
 C     Program to calculate the cosine of any number
 C     ------------------------------------------------------------------
 
       Program Cosine2
         implicit none
 
+C     ------------------------------------------------------------------
 C     Declare variables
 C     ------------------------------------------------------------------
-      integer   :: n, j     ! loop counters
-      integer   :: m        ! # of iterations 
-      real  ::  x       ! angle whose cosine needs to be calculated
-      real  :: temp, result ! cos(x)
+      integer   :: i, n  ! loop counters
+      integer   :: m     ! number of iterations 
+      real  ::  x        ! angle whose cosine needs to be calculated
+      real  :: temp      ! to store intermediate result
+      real  :: result    ! cos(x)
       character(len=30) :: output_file
 
 
-C     Ask user the angle for which the cosine needs to be calculated
+C     Ask user for number of iterations
 C     ------------------------------------------------------------------
       write(*,*) 'Enter the # of iterations (M):'
       read(*,*) m
@@ -35,12 +38,13 @@ C     ------------------------------------------------------------------
 C     Calculate the cos(x) for x = 0.0 to 1.5 with step of 0.05
 C     ------------------------------------------------------------------
 
-      do x = 0.0, 1.5, 0.05
+      do i = 0, 1500, 50
       
-C     Initialize result and temp for new value of x
+C     Initialize result and temp and calculate x
 C     ------------------------------------------------------------------
         result = 1
         temp = 1
+        x = real(i) / 1000
 
 C     Calculate the value of cos(x) and store it in `result`
 C     ------------------------------------------------------------------
