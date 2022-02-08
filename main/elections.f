@@ -16,6 +16,7 @@ C     ------------------------------------------------------------------
       integer   :: ushuaia(n), riogrande(n), antartica(n)
 
       character(len=30) :: parties(n)    ! names of all parties
+      character(len=60) :: party_abb(n)  ! party abbreviations
       character(len=30) :: winning_party ! name of winning party, if any
       character(len=30) :: a, b          ! dummy variables
 
@@ -28,20 +29,30 @@ C     ------------------------------------------------------------------
 C     Read input file for data
 C     ------------------------------------------------------------------
 
-      open(unit=23, file='P03-Elecciones.dat')
+      open(unit=10, file='P03-Elecciones.dat')
 
-      read(23, *) parties
-      read(23, *) a, ushuaia
-      read(23, *) a, b, riogrande
-      read(23, *) a, antartica
+      read(10, *) parties
+      read(10, *) a, ushuaia
+      read(10, *) a, b, riogrande
+      read(10, *) a, antartica
+      
+      read(10, *)
+      read(10, *)
+      
+C     ------------------------------------------------------------------
+C     Read party abbreviations and full names
+C     ------------------------------------------------------------------
+      do i=1, 12
+        read(10, '(A)') party_abb(i)
+      enddo
 
-      close(23)
+      close(10)
 
 20    format(2(a5,5x), a7)
 21    format(a, i10)
 22    format(a5, i10, f10.2)
 
-
+C     ------------------------------------------------------------------
 C     Write the header row for the table
 C     ------------------------------------------------------------------
 
@@ -52,6 +63,7 @@ C     ------------------------------------------------------------------
       
       total_votes = sum(ushuaia) + sum(riogrande) + sum(antartica)
 
+C     ------------------------------------------------------------------
 C     Calculate the percetange of votes for each party
 C     ------------------------------------------------------------------
 
@@ -59,7 +71,9 @@ C     ------------------------------------------------------------------
       
         votes(i) = ushuaia(i) + riogrande(i) + antartica(i)
         pct_votes(i) = 100 * (real(votes(i)) / real(total_votes))
+
         
+C     ------------------------------------------------------------------
 C     check if a party won the election with > 50% votes
 C     ------------------------------------------------------------------
 
@@ -80,6 +94,7 @@ C     ------------------------------------------------------------------
       write(*,21) '--------------------------------'
      
 
+C     ------------------------------------------------------------------
 C     Find winning party or find the most promising candidates
 C     ------------------------------------------------------------------
      
@@ -93,16 +108,20 @@ C     ------------------------------------------------------------------
       else
 
         ! sort votes array in place & in descending order
-        call bubble_sort(votes, n)
+        call bubble_sort(votes, parties, n)
 
-        write(*,21) 'Top promising candidates won...'
-        write(*, *) (votes(i), i = 1, 3)
+        write(*,21) 'Top promising candidates...'
+        
+        do i = 1, 3
+          write(*, *) parties(i), votes(i)
+        enddo
       
       endif
       
       write(*,21) '---------------------------------'
 
-
+      
+C     ------------------------------------------------------------------
 C     Everything done so end the program
 C     ------------------------------------------------------------------
       end program elections
@@ -111,7 +130,7 @@ C     ------------------------------------------------------------------
 C     ------------------------------------------------------------------
 C     Subroutine to perform inplace Bubble sort in descending order
 C     ------------------------------------------------------------------
-      subroutine bubble_sort(A, length)
+      subroutine bubble_sort(A, ABB, length)
 
             implicit none
 
@@ -122,6 +141,8 @@ C     ------------------------------------------------------------------
             integer     :: i, j, length
             integer     :: temp
             integer     :: A(length)
+            character(len=30) :: ABB(length)
+            character(len=30) :: temp_abb
             logical     :: swapped
 
 C     ------------------------------------------------------------------
@@ -137,6 +158,10 @@ C     ------------------------------------------------------------------
                               temp = A(i)
                               A(i) = A(i+1)
                               A(i+1) = temp
+                              
+                              temp_abb = ABB(i)
+                              ABB(i) = ABB(i+1)
+                              ABB(i+1) = temp_abb
                               swapped = .true.
                         endif
 
